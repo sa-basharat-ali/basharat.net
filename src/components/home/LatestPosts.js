@@ -8,33 +8,17 @@ import Image from 'next/image';
 const posts = [
   {
     id: 1,
-    title: "Understanding Neural Networks: A Beginner's Guide",
-    excerpt: "A comprehensive introduction to neural networks, their architecture, and how they learn from data.",
+    title: "How I Automated Recruiter Outreach: Scraping 300+ Emails and Sending Personalized Messages on Autopilot",
+    excerpt: "Tired of sending CVs separately? Let's automate everything.",
     image: "/images/blog1.jpg",
-    date: "2024-03-15",
-    readTime: "8 min read",
-    category: "Deep Learning",
-    slug: "understanding-neural-networks"
+    readTime: "8 min read"
   },
   {
     id: 2,
-    title: "The Future of AI in Healthcare",
-    excerpt: "Exploring how artificial intelligence is revolutionizing healthcare through diagnosis, treatment, and patient care.",
-    image: "/images/blog2.jpg",
-    date: "2024-03-10",
-    readTime: "6 min read",
-    category: "AI Applications",
-    slug: "ai-in-healthcare"
-  },
-  {
-    id: 3,
-    title: "Data Science Best Practices for 2024",
-    excerpt: "Essential practices and tools that every data scientist should know to stay competitive in the field.",
-    image: "/images/blog3.jpg",
-    date: "2024-03-05",
-    readTime: "10 min read",
-    category: "Data Science",
-    slug: "data-science-best-practices-2024"
+    title: "Docker vs Podman: A newbie taking on a legend",
+    excerpt: "If you are a MAC user, you will love this.",
+    image: "/images/blog2.png",
+    readTime: "6 min read"
   }
 ];
 
@@ -64,7 +48,7 @@ export default function LatestPosts() {
   };
 
   return (
-    <div className="container mx-auto px-4" ref={ref}>
+    <div className="container mx-auto px-4 flex flex-col items-center" ref={ref}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -84,7 +68,7 @@ export default function LatestPosts() {
         variants={containerVariants}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-4xl mx-auto"
       >
         {posts.map((post) => (
           <motion.article
@@ -111,12 +95,6 @@ export default function LatestPosts() {
               
               <div className="p-6">
                 <div className="flex items-center text-sm text-light-darker mb-3">
-                  <span>{new Date(post.date).toLocaleDateString('en-US', { 
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric'
-                  })}</span>
-                  <span className="mx-2">•</span>
                   <span>{post.readTime}</span>
                 </div>
                 

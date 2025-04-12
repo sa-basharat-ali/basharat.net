@@ -13,8 +13,8 @@ export default function Hero() {
 
     const phrases = [
       'Data Scientist',
-      'AI Specialist',
-      'Technology Educator',
+      'Tech Educator',
+      'Tech Content Creator'
     ];
 
     let currentPhraseIndex = 0;
@@ -64,7 +64,7 @@ export default function Hero() {
         >
           <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">
             <span>Hello, I'm </span>
-            <span className="text-gradient">Basharat Ali</span>
+            <span className="text-gradient">S A Basharat Ali</span>
           </h1>
           
           <div className="flex items-baseline mb-8">
@@ -75,8 +75,7 @@ export default function Hero() {
           </div>
           
           <p className="text-lg md:text-xl text-light-darker mb-8 max-w-2xl">
-            Helping organizations leverage data and AI technologies to make better decisions 
-            and educating the community about advancements in the AI world.
+            I transform raw data into strategic solutions that drive business growth and efficiency. Let’s harness the power of data to solve your toughest challenges.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">

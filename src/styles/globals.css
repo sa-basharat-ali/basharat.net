@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.perspective {
+  perspective: 1000px;
+}
+
 :root {
   --foreground-rgb: 18, 18, 18;
   --background-start-rgb: 249, 250, 251;

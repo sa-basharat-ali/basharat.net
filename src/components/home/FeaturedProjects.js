@@ -8,28 +8,20 @@ import Image from 'next/image';
 const projects = [
   {
     id: 1,
-    title: "Customer Churn Prediction",
-    description: "Developed a machine learning model to predict customer churn for a telecom company with 85% accuracy.",
-    image: "/images/project1.jpg",
-    tags: ["Machine Learning", "Python", "Scikit-learn"],
+    title: "Used Car Market Analysis",
+    description: "Scrapped, cleaned, visualized, analyzed and gave recommendations on used car market data",
+    image: "/images/project1.png",
+    tags: ["Python", "EDA", "Tableau"],
     link: "/projects/customer-churn-prediction"
   },
   {
     id: 2,
-    title: "Sentiment Analysis Dashboard",
-    description: "Created an NLP-powered dashboard to analyze customer feedback and social media sentiment in real-time.",
-    image: "/images/project2.jpg",
-    tags: ["NLP", "Python", "React", "Dashboard"],
+    title: "Data Science Agent",
+    description: "An all-round data science agent that can make your technical life simple",
+    image: "/images/DS Agent.png",
+    tags: ["Python","Groq", "AI Agent"],
     link: "/projects/sentiment-analysis-dashboard"
-  },
-  {
-    id: 3,
-    title: "Computer Vision for Retail",
-    description: "Implemented computer vision solutions for shelf monitoring and customer behavior analysis in retail stores.",
-    image: "/images/project3.jpg",
-    tags: ["Computer Vision", "TensorFlow", "Edge AI"],
-    link: "/projects/computer-vision-retail"
-  },
+  }
 ];
 
 export default function FeaturedProjects() {
@@ -58,12 +50,12 @@ export default function FeaturedProjects() {
   };
 
   return (
-    <div className="container mx-auto px-4" ref={ref}>
+    <div className="container mx-auto px-4 flex flex-col items-center" ref={ref}>
       <motion.div
+        className="max-w-5xl w-full mb-12 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.5 }}
-        className="mb-12 text-center"
       >
         <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
           <span className="text-gradient">Featured Projects</span>
@@ -78,7 +70,7 @@ export default function FeaturedProjects() {
         variants={containerVariants}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center max-w-4xl mx-auto"
       >
         {projects.map((project) => (
           <motion.div 

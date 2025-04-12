@@ -29,8 +29,8 @@ export default function ContactCTA() {
         </h2>
         
         <p className="text-light-darker mb-8 max-w-2xl mx-auto">
-          Whether you need consultation on your data strategy, custom AI solutions, 
-          or training for your team, I'm here to help you leverage the power of data science and AI.
+          Whether you need consultation on your data strategy, custom AI/data solutions 
+          or training for your team/individual, I'm here to help you leverage the power of data science and AI.
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -41,7 +41,7 @@ export default function ContactCTA() {
             Get in Touch
           </Link>
           <Link 
-            href="/contact#training" 
+            href="/trainings" 
             className="px-8 py-3 bg-transparent border border-primary text-primary hover:bg-primary/10 font-medium rounded-lg transition-colors"
           >
             Request Training

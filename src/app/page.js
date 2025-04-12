@@ -1,6 +1,5 @@
 import Hero from '@/components/home/Hero';
 import AboutSection from '@/components/home/AboutSection';
-import SkillsSection from '@/components/home/SkillsSection';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
 import LatestPosts from '@/components/home/LatestPosts';
 import ContactCTA from '@/components/home/ContactCTA';
@@ -14,10 +13,7 @@ export default function Home() {
         <AboutSection />
       </section>
       
-      <section id="skills" className="py-20 bg-dark-lighter">
-        <SkillsSection />
-      </section>
-      
+
       <section id="projects" className="py-20 bg-dark">
         <FeaturedProjects />
       </section>
