@@ -4,31 +4,54 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 import Image from 'next/image';
-
-const projects = [
-  {
-    id: 1,
-    title: "Used Car Market Analysis",
-    description: "Scrapped, cleaned, visualized, analyzed and gave recommendations on used car market data",
-    image: "/images/project1.png",
-    tags: ["Python", "EDA", "Tableau"],
-    link: "/projects/customer-churn-prediction"
-  },
-  {
-    id: 2,
-    title: "Data Science Agent",
-    description: "An all-round data science agent that can make your technical life simple",
-    image: "/images/DS Agent.png",
-    tags: ["Python","Groq", "AI Agent"],
-    link: "/projects/sentiment-analysis-dashboard"
-  }
-];
+import { useState, useEffect } from 'react';
+import { getFeaturedProjects, urlFor } from '@/lib/sanity';
 
 export default function FeaturedProjects() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        setLoading(true);
+        const fetchedProjects = await getFeaturedProjects();
+        setProjects(fetchedProjects);
+      } catch (err) {
+        console.error('Error fetching featured projects:', err);
+        setError('Failed to load featured projects');
+        // Fallback to hardcoded data if Sanity fails
+        setProjects([
+          {
+            _id: "fallback-1",
+            title: "Used Car Market Analysis",
+            description: "Scrapped, cleaned, visualized, analyzed and gave recommendations on used car market data",
+            imageUrl: "/images/project1.png",
+            tags: ["Python", "EDA", "Tableau"],
+            projectLink: "/projects/customer-churn-prediction"
+          },
+          {
+            _id: "fallback-2",
+            title: "Data Science Agent",
+            description: "An all-round data science agent that can make your technical life simple",
+            imageUrl: "/images/DS Agent.png",
+            tags: ["Python","Groq", "AI Agent"],
+            projectLink: "/projects/sentiment-analysis-dashboard"
+          }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProjects();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -49,6 +72,14 @@ export default function FeaturedProjects() {
     },
   };
 
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 flex flex-col items-center">
+        <div className="text-xl">Loading featured projects...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 flex flex-col items-center" ref={ref}>
       <motion.div
@@ -64,6 +95,11 @@ export default function FeaturedProjects() {
         <p className="text-light-darker max-w-2xl mx-auto">
           Check out some of my recent data science and AI projects that showcase my skills and expertise.
         </p>
+        {error && (
+          <p className="text-yellow-500 mt-4 text-sm">
+            Note: Using fallback data. Please check Sanity configuration.
+          </p>
+        )}
       </motion.div>
 
       <motion.div
@@ -74,13 +110,13 @@ export default function FeaturedProjects() {
       >
         {projects.map((project) => (
           <motion.div 
-            key={project.id}
+            key={project._id}
             variants={itemVariants}
             className="bg-dark-lighter rounded-xl overflow-hidden transition-transform hover:transform hover:scale-[1.02] group"
           >
             <div className="relative h-48 overflow-hidden">
               <Image
-                src={project.image}
+                src={project.imageUrl || project.image || "/images/project-placeholder.jpg"}
                 alt={project.title}
                 fill
                 style={{ objectFit: "cover" }}
@@ -99,9 +135,9 @@ export default function FeaturedProjects() {
               </p>
               
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map((tag) => (
+                {project.tags?.map((tag, index) => (
                   <span 
-                    key={tag} 
+                    key={index} 
                     className="text-xs py-1 px-2 bg-primary/20 text-primary rounded-full"
                   >
                     {tag}
@@ -110,7 +146,7 @@ export default function FeaturedProjects() {
               </div>
               
               <Link 
-                href={project.link} 
+                href={project.projectLink || project.githubLink || "#"} 
                 className="text-primary font-medium flex items-center group-hover:text-primary-light transition-colors"
               >
                 View Project

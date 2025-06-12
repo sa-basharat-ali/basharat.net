@@ -3,63 +3,54 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
-
-const projects = [
-  {
-    id: 1,
-    title: "Customer Churn Prediction",
-    description: "Developed a machine learning model to predict customer churn for a telecom company with 85% accuracy. Implemented feature engineering, model selection, and deployment pipeline.",
-    image: "/images/project1.jpg",
-    tags: ["Machine Learning", "Python", "Scikit-learn", "Feature Engineering"],
-    link: "https://github.com/username/churn-prediction"
-  },
-  {
-    id: 2,
-    title: "Sentiment Analysis Dashboard",
-    description: "Created an NLP-powered dashboard to analyze customer feedback and social media sentiment in real-time. Built using BERT for text classification and React for the frontend.",
-    image: "/images/project2.jpg",
-    tags: ["NLP", "BERT", "Python", "React", "Dashboard"],
-    link: "https://github.com/username/sentiment-dashboard"
-  },
-  {
-    id: 3,
-    title: "Computer Vision for Retail",
-    description: "Implemented computer vision solutions for shelf monitoring and customer behavior analysis in retail stores using YOLOv5 and tracking algorithms.",
-    image: "/images/project3.jpg",
-    tags: ["Computer Vision", "YOLOv5", "TensorFlow", "Edge AI"],
-    link: "https://github.com/username/retail-vision"
-  },
-  {
-    id: 4,
-    title: "Time Series Forecasting",
-    description: "Built a time series forecasting system for inventory management using Prophet and LSTM models. Achieved 30% improvement in forecast accuracy.",
-    image: "/images/project4.jpg",
-    tags: ["Time Series", "Prophet", "LSTM", "Python"],
-    link: "https://github.com/username/time-series"
-  },
-  {
-    id: 5,
-    title: "Recommendation Engine",
-    description: "Developed a hybrid recommendation system combining collaborative filtering and content-based approaches for an e-commerce platform.",
-    image: "/images/project5.jpg",
-    tags: ["Recommender Systems", "Python", "Neural Networks"],
-    link: "https://github.com/username/recommender"
-  },
-  {
-    id: 6,
-    title: "Anomaly Detection System",
-    description: "Created an unsupervised anomaly detection system for IoT sensor data using autoencoders and statistical methods.",
-    image: "/images/project6.jpg",
-    tags: ["Anomaly Detection", "IoT", "Deep Learning"],
-    link: "https://github.com/username/anomaly-detection"
-  }
-];
+import { useState, useEffect } from 'react';
+import { getProjects, urlFor } from '@/lib/sanity';
 
 export default function Projects() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        setLoading(true);
+        const fetchedProjects = await getProjects();
+        setProjects(fetchedProjects);
+      } catch (err) {
+        console.error('Error fetching projects:', err);
+        setError('Failed to load projects');
+        // Fallback to hardcoded data if Sanity fails
+        setProjects([
+          {
+            _id: "fallback-1",
+            title: "Customer Churn Prediction",
+            description: "Developed a machine learning model to predict customer churn for a telecom company with 85% accuracy. Implemented feature engineering, model selection, and deployment pipeline.",
+            imageUrl: "/images/project1.jpg",
+            tags: ["Machine Learning", "Python", "Scikit-learn", "Feature Engineering"],
+            githubLink: "https://github.com/username/churn-prediction"
+          },
+          {
+            _id: "fallback-2",
+            title: "Sentiment Analysis Dashboard",
+            description: "Created an NLP-powered dashboard to analyze customer feedback and social media sentiment in real-time. Built using BERT for text classification and React for the frontend.",
+            imageUrl: "/images/project2.jpg",
+            tags: ["NLP", "BERT", "Python", "React", "Dashboard"],
+            githubLink: "https://github.com/username/sentiment-dashboard"
+          }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProjects();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -80,6 +71,16 @@ export default function Projects() {
     },
   };
 
+  if (loading) {
+    return (
+      <div className="pt-24 pb-16">
+        <div className="container mx-auto px-4 text-center">
+          <div className="text-xl">Loading projects...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-24 pb-16">
       <div className="container mx-auto px-4" ref={ref}>
@@ -96,6 +97,11 @@ export default function Projects() {
           <p className="text-light-darker max-w-2xl mx-auto">
             Explore my portfolio of data science and AI projects, showcasing real-world applications and solutions.
           </p>
+          {error && (
+            <p className="text-yellow-500 mt-4">
+              Note: Using fallback data. Please check Sanity configuration.
+            </p>
+          )}
         </motion.div>
 
         <motion.div
@@ -106,13 +112,13 @@ export default function Projects() {
         >
           {projects.map((project) => (
             <motion.div
-              key={project.id}
+              key={project._id}
               variants={itemVariants}
               className="bg-dark-lighter rounded-xl overflow-hidden transition-transform hover:transform hover:scale-[1.02] group"
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
-                  src={project.image}
+                  src={project.imageUrl || project.image || "/images/project-placeholder.jpg"}
                   alt={project.title}
                   fill
                   style={{ objectFit: "cover" }}
@@ -131,9 +137,9 @@ export default function Projects() {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
+                  {project.tags?.map((tag, index) => (
                     <span 
-                      key={tag} 
+                      key={index} 
                       className="text-xs py-1 px-2 bg-primary/20 text-primary rounded-full"
                     >
                       {tag}
@@ -142,7 +148,7 @@ export default function Projects() {
                 </div>
                 
                 <a 
-                  href={project.link}
+                  href={project.projectLink || project.githubLink || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary font-medium flex items-center group-hover:text-primary-light transition-colors"
