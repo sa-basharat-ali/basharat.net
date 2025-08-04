@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { getProjects, urlFor } from '@/lib/sanity';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -20,12 +19,7 @@ export default function Projects() {
     async function fetchProjects() {
       try {
         setLoading(true);
-        const fetchedProjects = await getProjects();
-        setProjects(fetchedProjects);
-      } catch (err) {
-        console.error('Error fetching projects:', err);
-        setError('Failed to load projects');
-        // Fallback to hardcoded data if Sanity fails
+        // Using static project data since we're not using Sanity anymore
         setProjects([
           {
             _id: "fallback-1",

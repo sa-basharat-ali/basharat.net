@@ -68,20 +68,21 @@ export default function Hero() {
               
               <div className="space-y-4 text-light-darker leading-relaxed">
                 <p>
-                  Currently I am in NYC getting business knowledge sorted in the capital of business world.
+                Currently based in NYC, expanding my business acumen in the world’s capital of commerce.
                 </p>
                 
                 <p>
-                  Scaled data practices from startups to Big 4 consulting and Middle East fintech giants. Optimized warehouses, built dashboards, and deployed predictive models across the full data lifecycle.
+                I've scaled data practices from scrappy startups to Big 4 consulting and Middle Eastern fintech giants — optimizing warehouses, building impactful dashboards, and deploying predictive models across the entire data lifecycle.
+
                 </p>
                 
                 <p>
-                  I demystify AI through punchy tutorials and content, making complex tech accessible to all.
+                I break down AI and data topics through sharp, practical tutorials — making complex tech understandable for everyone.
                 </p>
               </div>
 
               <div className="space-y-3">
-                <p className="text-light-darker">I'm interested in connecting with people who are excited by anything related to data or AI. If you are starting in the field or want to work together and find me worthy of your time, I am just a click away.</p>
+                <p className="text-light-darker">Whether you’re new to the field or building the next big thing, I’d love to connect. Let’s talk data, AI, or potential collaborations, I’m just a click away.</p>
                 
               </div>
 
