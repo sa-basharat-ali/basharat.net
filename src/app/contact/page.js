@@ -98,13 +98,13 @@ export default function Contact() {
                 <div>
                   <h3 className="font-medium mb-1">Social Media</h3>
                   <div className="flex space-x-4">
-                    <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-light-darker hover:text-primary transition-colors">
+                    <a href="https://www.linkedin.com/in/sa-basharat-ali" target="_blank" rel="noopener noreferrer" className="text-light-darker hover:text-primary transition-colors">
                       LinkedIn
                     </a>
-                    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="text-light-darker hover:text-primary transition-colors">
-                      Twitter
+                    <a href="https://www.x.com/sabshrtali" target="_blank" rel="noopener noreferrer" className="text-light-darker hover:text-primary transition-colors">
+                      X
                     </a>
-                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="text-light-darker hover:text-primary transition-colors">
+                    <a href="https://www.github.com/sa-basharat-ali" target="_blank" rel="noopener noreferrer" className="text-light-darker hover:text-primary transition-colors">
                       GitHub
                     </a>
                   </div>

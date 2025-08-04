@@ -33,7 +33,7 @@ export default function Projects() {
             description: "Developed a machine learning model to predict customer churn for a telecom company with 85% accuracy. Implemented feature engineering, model selection, and deployment pipeline.",
             imageUrl: "/images/project1.jpg",
             tags: ["Machine Learning", "Python", "Scikit-learn", "Feature Engineering"],
-            githubLink: "https://github.com/username/churn-prediction"
+            githubLink: "https://www.github.com/sa-basharat-ali/churn-prediction"
           },
           {
             _id: "fallback-2",
@@ -41,7 +41,7 @@ export default function Projects() {
             description: "Created an NLP-powered dashboard to analyze customer feedback and social media sentiment in real-time. Built using BERT for text classification and React for the frontend.",
             imageUrl: "/images/project2.jpg",
             tags: ["NLP", "BERT", "Python", "React", "Dashboard"],
-            githubLink: "https://github.com/username/sentiment-dashboard"
+            githubLink: "https://www.github.com/sa-basharat-ali/sentiment-dashboard"
           }
         ]);
       } finally {
