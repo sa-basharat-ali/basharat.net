@@ -54,9 +54,6 @@ export default function Hero() {
               <Link href="/blog" className="text-light-darker hover:text-primary transition-colors font-medium">
                 Writing
               </Link>
-              <Link href="/contact" className="text-light-darker hover:text-primary transition-colors font-medium">
-                Contact
-              </Link>
             </div>
             {/* Subtle line */}
             <div className="w-24 h-px bg-light-darker/30"></div>

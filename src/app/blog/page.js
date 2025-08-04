@@ -123,9 +123,6 @@ export default function Blog() {
               <Link href="/blog" className="text-primary font-medium">
                 Writing
               </Link>
-              <Link href="/contact" className="text-light-darker hover:text-primary transition-colors font-medium">
-                Contact
-              </Link>
             </div>
             {/* Subtle line */}
             <div className="w-24 h-px bg-light-darker/30"></div>
