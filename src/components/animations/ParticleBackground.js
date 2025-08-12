@@ -50,39 +50,39 @@ export default function ParticleBackground() {
           },
           links: {
             color: "#6C63FF",
-            distance: 150,
+            distance: 140,
             enable: true,
-            opacity: 0.3,
-            width: 1,
+            opacity: 0.25,
+            width: 0.8,
           },
           collisions: {
-            enable: true,
+            enable: false,
           },
           move: {
             direction: "none",
             enable: true,
             outModes: {
-              default: "bounce",
+              default: "out",
             },
-            random: false,
-            speed: 1,
+            random: true,
+            speed: 0.5,
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 1000,
             },
-            value: 80,
+            value: 45,
           },
           opacity: {
-            value: 0.3,
+            value: 0.25,
           },
           shape: {
             type: "circle",
           },
           size: {
-            value: { min: 1, max: 3 },
+            value: { min: 1, max: 2.5 },
           },
         },
         detectRetina: true,
